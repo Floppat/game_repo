@@ -46,7 +46,11 @@ public class Run : MonoBehaviour
     void FixedUpdate()
     {
         tick++;
-        rb.MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
+        rb.velocity = new Vector3(
+            direction.x * movementSpeed,
+            rb.velocity.y,  // сохраняем вертикальную скорость (гравитация, прыжок)
+            direction.z * movementSpeed
+        );
     }
     private void OnCollisionStay(Collision other)
     {
